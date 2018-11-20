@@ -3,7 +3,7 @@
 
 ## Requirements
 1. Start a contest
-..* The user will start a contest with a url http://localhost:8080/newcontest. The response will return a random integer between 1-1000
+..*The user will start a contest with a url http://localhost:8080/newcontest. The response will return a random integer between 1-1000
 This number will be used as the contestid. Do not use a contestid that is already in use.
 For each subsequent request to the server, the contestid must be specified on the url.
 Each contest will have a 120 second timer, once 0 is reached, subsequent requests will return status code HttpServletResponse.SC_GONE. 
