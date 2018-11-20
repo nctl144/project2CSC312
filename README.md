@@ -10,22 +10,22 @@
   * Each contest will have a 120 second timer, once 0 is reached, subsequent requests will return status code HttpServletResponse.SC_GONE. 
 
 2. Accessing a letter
-To access a letter at a specific location:
+  * To access a letter at a specific location use this URL:
 (http://localhost:8080//wordfinder?contest=<contest id received as response to newcontest>&game=<1 to 3>&pos=<column><row>)
-contest:the contest id received in when starting a contest (see step 1).
-game:1-3
-Column: a-e
-Row: 1-5
-If the user submits a request, with an invalid contest id, game or pos, you must responde with the status code: response.SC_BAD_REQUEST.
+  * contest:the contest id received in when starting a contest (see step 1).
+  * game:1-3
+  * Column: a-e
+  * Row: 1-5
+  * If the user submits a request, with an invalid contest id, game or pos, you must responde with the status code: response.SC_BAD_REQUEST.
 
 3. Submitting a solution
-to submit a solution to the contest, a specific url is used:
+  * to submit a solution to the contest, a specific url is used:
 http://localhost:8080//solution?contest=<contest id received as response to newcontest>&game=<1 to 3>&solution=<word>
-solution: the word which is the solution
-If a submission is valid we must:
-return SC_OK and in the html text, the number of seconds it took to resolve the problem and how many letters were requested.
-If a submission is invalid for a game:
-the contest id must be considered invalid, and further request using this contestid should return response.SC_BAD_REQUEST.
+  * solution: the word which is the solution
+  * If a submission is valid we must:
+  * return SC_OK and in the html text, the number of seconds it took to resolve the problem and how many letters were requested.
+  * If a submission is invalid for a game:
+  * the contest id must be considered invalid, and further request using this contestid should return response.SC_BAD_REQUEST.
 
 For a valid submission, keep a list of the 5 fastest (in term of request of letters) contest.
 
