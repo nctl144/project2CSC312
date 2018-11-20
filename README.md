@@ -1,7 +1,7 @@
 # project2CSC312
 ### Lam and Sam aka LAMUELSOFT
 
-##Requirements
+## Requirements
 1. Start a contest
 The user will start a contest with a url http://localhost:8080/newcontest. The response will return a random integer between 1-1000
 This number will be used as the contestid. Do not use a contestid that is already in use.
@@ -33,13 +33,13 @@ Game 1:  position A1:A3, solution: zap
 Game 2:  position E3:E5, solution: zig
 Game 3:  position  C2:C4, solution: zag
 
-4-Top Score
+4. Top Score
 The url : https:// localhost:8080/topscore, will return in descending order the list of the 5 fastest times.
 
 Output should be in this form:
 contest id, time in seconds
 
-5-Word list
+5. Word list
 the url https:// localhost:8080/words, will return this list of words:
 zap
 zep
@@ -47,7 +47,7 @@ zip
 zag
 zig
 
-6-Unit tests:
+6. Unit tests:
 you must provide individual unit tests for each item that you must test
 A unit test must be created for:
 -validation that the word list is correct
