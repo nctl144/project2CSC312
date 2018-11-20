@@ -10,7 +10,7 @@
   * Each contest will have a 120 second timer, once 0 is reached, subsequent requests will return status code HttpServletResponse.SC_GONE. 
 
 2. Accessing a letter
-  * To access a letter at a specific location use this URL:
+   * To access a letter at a specific location use this URL:
 (http://localhost:8080//wordfinder?contest=<contest id received as response to newcontest>&game=<1 to 3>&pos=<column><row>)
   * contest:the contest id received in when starting a contest (see step 1).
   * game:1-3
@@ -26,35 +26,34 @@ http://localhost:8080//solution?contest=<contest id received as response to newc
   * return SC_OK and in the html text, the number of seconds it took to resolve the problem and how many letters were requested.
   * If a submission is invalid for a game:
   * the contest id must be considered invalid, and further request using this contestid should return response.SC_BAD_REQUEST.
-
-For a valid submission, keep a list of the 5 fastest (in term of request of letters) contest.
+  * For a valid submission, keep a list of the 5 fastest (in term of request of letters) contest.
 
 The solutions must be in this form:
-Game 1:  position A1:A3, solution: zap
-Game 2:  position E3:E5, solution: zig
-Game 3:  position  C2:C4, solution: zag
+  * Game 1:  position A1:A3, solution: zap
+  * Game 2:  position E3:E5, solution: zig
+  * Game 3:  position  C2:C4, solution: zag
 
 4. Top Score
-The url : https:// localhost:8080/topscore, will return in descending order the list of the 5 fastest times.
+  * The url : https:// localhost:8080/topscore, will return in descending order the list of the 5 fastest times.
 
-Output should be in this form:
-contest id, time in seconds
+  * Output should be in this form:
+  * contest id, time in seconds
 
 5. Word list
 the url https:// localhost:8080/words, will return this list of words:
-zap
-zep
-zip
-zag
-zig
+  * zap
+  * zep
+  * zip
+  * zag
+  * zig
 
 6. Unit tests:
 you must provide individual unit tests for each item that you must test
 A unit test must be created for:
--validation that the word list is correct
--validation of starting a new contest
--validation of requesting for a letter (valid and invalid values for each parameter and combination).
--validation of the timeout process for a contest (see https://docs.oracle.com/javase/tutorial/essential/concurrency/sleep.html)
--validation of submitting a solution (valid and invalid submission + management of the contest)
--validation of the top score
+  * -validation that the word list is correct
+  * -validation of starting a new contest
+  * -validation of requesting for a letter (valid and invalid values for each parameter and combination).
+  * -validation of the timeout process for a contest (see https://docs.oracle.com/javase/tutorial/essential/concurrency/sleep.html)
+  * -validation of submitting a solution (valid and invalid submission + management of the contest)
+  * -validation of the top score
 
