@@ -40,7 +40,7 @@ The solutions must be in this form:
   * contest id, time in seconds
 
 5. Word list
-the url https:// localhost:8080/words, will return this list of words:
+  * the url https:// localhost:8080/words, will return this list of words:
   * zap
   * zep
   * zip
