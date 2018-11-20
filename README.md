@@ -41,11 +41,11 @@ The solutions must be in this form:
 
 5. Word list
   * the url https:// localhost:8080/words, will return this list of words:
-  * zap
-  * zep
-  * zip
-  * zag
-  * zig
+  1 zap
+  2 zep
+  3 zip
+  4 zag
+  5 zig
 
 6. Unit tests:
 you must provide individual unit tests for each item that you must test
