@@ -2,5 +2,27 @@
 <classpath>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.8"/>
 	<classpathentry kind="src" path="src"/>
+	<classpathentry kind="lib" path="/Users/nctl144/Desktop/project2CSC312/lib/tomcat-i18n-es.jar"/>
+	<classpathentry kind="lib" path="/Users/nctl144/Desktop/project2CSC312/lib/tomcat-i18n-fr.jar"/>
+	<classpathentry kind="lib" path="/Users/nctl144/Desktop/project2CSC312/lib/tomcat-i18n-ja.jar"/>
+	<classpathentry kind="lib" path="/Users/nctl144/Desktop/project2CSC312/lib/tomcat-jdbc.jar"/>
+	<classpathentry kind="lib" path="/Users/nctl144/Desktop/project2CSC312/lib/tomcat-util.jar"/>
+	<classpathentry kind="lib" path="/Users/nctl144/Desktop/project2CSC312/lib/tomcat7-websocket.jar"/>
+	<classpathentry kind="lib" path="/Users/nctl144/Desktop/project2CSC312/lib/websocket-api.jar"/>
+	<classpathentry kind="lib" path="/Users/nctl144/Desktop/project2CSC312/lib/annotations-api.jar"/>
+	<classpathentry kind="lib" path="/Users/nctl144/Desktop/project2CSC312/lib/catalina-ant.jar"/>
+	<classpathentry kind="lib" path="/Users/nctl144/Desktop/project2CSC312/lib/catalina-ha.jar"/>
+	<classpathentry kind="lib" path="/Users/nctl144/Desktop/project2CSC312/lib/catalina-tribes.jar"/>
+	<classpathentry kind="lib" path="/Users/nctl144/Desktop/project2CSC312/lib/catalina.jar"/>
+	<classpathentry kind="lib" path="/Users/nctl144/Desktop/project2CSC312/lib/ecj-4.4.2.jar"/>
+	<classpathentry kind="lib" path="/Users/nctl144/Desktop/project2CSC312/lib/el-api.jar"/>
+	<classpathentry kind="lib" path="/Users/nctl144/Desktop/project2CSC312/lib/jasper-el.jar"/>
+	<classpathentry kind="lib" path="/Users/nctl144/Desktop/project2CSC312/lib/jasper.jar"/>
+	<classpathentry kind="lib" path="/Users/nctl144/Desktop/project2CSC312/lib/jsp-api.jar"/>
+	<classpathentry kind="lib" path="/Users/nctl144/Desktop/project2CSC312/lib/servlet-api.jar"/>
+	<classpathentry kind="lib" path="/Users/nctl144/Desktop/project2CSC312/lib/tomcat-api.jar"/>
+	<classpathentry kind="lib" path="/Users/nctl144/Desktop/project2CSC312/lib/tomcat-coyote.jar"/>
+	<classpathentry kind="lib" path="/Users/nctl144/Desktop/project2CSC312/lib/tomcat-dbcp.jar"/>
+	<classpathentry kind="lib" path="/Users/nctl144/Desktop/project2CSC312/lib/tomcat-juli-7.0.16.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
