@@ -1,6 +1,7 @@
 package project2;
 
 import java.io.File;
+import java.util.ArrayList;
 
 import javax.servlet.ServletException;
 
@@ -29,4 +30,14 @@ public class project2 {
 	    tomcat.getServer().await();
 	}
 	
+	public static boolean isValidRequest(int game, String column, int row) {
+		ArrayList<String> columnLetters = new ArrayList<String>();
+		
+		if (game < 1 || game > 3 || !columnLetters.contains(column) 
+			|| row < 1 || row > 5) {
+			return false;
+		}
+			
+		return true;
+	}
 }
