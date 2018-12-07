@@ -14,6 +14,7 @@ import org.apache.catalina.LifecycleException;
 import org.apache.catalina.startup.Tomcat;
 
 import project2.servlet.Words;
+import project2.servlet.Contest;
 
 public class project2 {
 	public static int port = 8080;
@@ -63,9 +64,11 @@ public class project2 {
 	    Context ctx = tomcat.addContext("/", new File(".").getAbsolutePath());
 	
 	    Tomcat.addServlet(ctx, "words", new Words() );
-		    
+		Tomcat.addServlet(ctx, "contest", new Contest() );    
 
 	    ctx.addServletMapping("/words", "words");
+	    ctx.addServletMapping("/contest", "contest");
+	    
 	    tomcat.start();
 	    tomcat.getServer().await();
 	}
