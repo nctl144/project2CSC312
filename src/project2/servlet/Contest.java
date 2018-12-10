@@ -35,20 +35,14 @@ public class Contest extends HttpServlet {
             }
         }
         
-        //resp.sendRedirect("http://");
-       
-        /* for the timer
-        int delay = 120 * 1000; //120 seconds * 1000 for miliseconds
-        Timer timer = new Timer();
-        timer.schedule(delay);//figure this out rn
-       */
-        
         
         ServletOutputStream out = resp.getOutputStream();
         out.write(currentID);
         try {
         Thread.sleep(120 * 1000);
         } throws InterruptException(e);
+        
+        resp.setStatus(HttpServletResponse.SC_GONE);
         out.flush();
         out.close(); 
         
