@@ -59,6 +59,13 @@ public class Chars extends HttpServlet {
 		String gameNum = pathInfo.get("game");
 		String position = pathInfo.get("pos");
 		
+		boolean isValidRequest = isBadRequest(gameNum, position);
+		if (!isValidRequest) {
+			output.write(HttpServletResponse.SC_GONE);
+			output.flush();
+	        output.close();
+		}
+		
 		
 		// check if the request is valid
 		
@@ -98,6 +105,36 @@ public class Chars extends HttpServlet {
     	int col = charToIndex.get(pos.substring(0, 1));
 
     	return grids[row][col];
+    }
+    
+    public boolean isBadRequest(String gameNumber, String position) {
+    	String[] positionInOrder = {
+				"A1", "B1", "C1", "D1", "E1",
+				"A2", "B2", "C2", "D2", "E2",
+				"A3", "B3", "C3", "D3", "E3",
+				"A4", "B4", "C4", "D4", "E4",
+				"A5", "B5", "C5", "D5", "E5",
+		};
+    	
+    	boolean validPos = false;
+    	boolean validGameNum = false;
+
+    	// check if the pos is valid
+    	for (int i = 0; i < positionInOrder.length; i ++) {
+    		if (positionInOrder[i].equals(position)) {
+    			validPos = true;
+    		}
+    	}
+    	
+    	if (Integer.parseInt(gameNumber) <= 3 && Integer.parseInt(gameNumber) >= 1) {
+    		out.print("this is here 2");
+    		validGameNum = true;
+    	}
+  
+    	if (!validPos || !validGameNum) {
+    		return false;
+    	}
+    	return true;
     }
 
 }

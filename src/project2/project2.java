@@ -30,9 +30,8 @@ public class project2 {
 	
 	    Tomcat.addServlet(ctx, "words", new Words() );
 		ctx.addServletMapping("/words", "words");
-		Tomcat.addServlet(ctx, "hello1", new Chars() );
-		ctx.addServletMapping("/contest=1&game=1&pos=A5", "hello1");
-		
+		Tomcat.addServlet(ctx, "charreq", new Chars() );
+//		buildServletMapping(ctx, tomcat);
 
 	    tomcat.start();
 	    tomcat.getServer().await();
@@ -40,7 +39,7 @@ public class project2 {
 //	    tomcat.destroy();
 	}
 		
-	public static void buildServletMapping(Context ctx, Tomcat tomcat, HashMap<String, String[][]> grids) {
+	public static void buildServletMapping(Context ctx, Tomcat tomcat) {
 		// first, there are 3 games to add 
 		// second, there are 25 positions to add into the url
 		String[] positionInOrder = {
@@ -50,15 +49,13 @@ public class project2 {
 				"A4", "B4", "C4", "D4", "E4",
 				"A5", "B5", "C5", "D5", "E5",
 		};
-		int counter = 0;
 		
 		// game number is from 1 -> 3
 		for (int i = 1; i < 4; i ++) {
 			for (int j = 0; j < positionInOrder.length; j ++) {
-				Tomcat.addServlet(ctx, "words" + Integer.toString(counter), new Words() );
+				Tomcat.addServlet(ctx, "charreq", new Words() );
 				String servletPath = createUrl(1, i, positionInOrder[j]);
-				ctx.addServletMapping(servletPath, "words" + Integer.toString(counter));
-				counter += 1;
+				ctx.addServletMapping(servletPath, "charreq");
 			}
 		}
 	}
@@ -101,7 +98,7 @@ public class project2 {
 		String servletPath = new String();
 		
 
-		String path = "/wordfinder?";
+		String path = "/";
 		String query = "contest=" + Integer.toString(contestNumber) + "&game=" + 
 						Integer.toString(gameNumber) + "&pos=" + pos;
 
