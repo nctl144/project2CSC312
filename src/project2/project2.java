@@ -14,6 +14,7 @@ import org.apache.catalina.LifecycleException;
 import org.apache.catalina.startup.Tomcat;
 
 import project2.servlet.Words;
+import project2.servlet.Chars;
 
 public class project2 {
 	public static int port = 8080;
@@ -21,53 +22,45 @@ public class project2 {
 	public static void main(String[] args)
     		  throws LifecycleException, InterruptedException, ServletException {
 		
-		HashMap<String, String[][]> grids = new HashMap<String, String[][]>();
-		
-		String[][] grid1 = {
-			{"a", "e", "s", "q", "w"},
-			{"a", "e", "s", "q", "w"},
-			{"a", "e", "s", "q", "w"},
-			{"a", "e", "s", "q", "w"},
-			{"a", "e", "s", "q", "w"}
-		};
-		
-		String[][] grid2 = {
-			{"a", "e", "s", "q", "w"},
-			{"a", "e", "s", "q", "w"},
-			{"a", "e", "s", "q", "w"},
-			{"a", "e", "s", "q", "w"},
-			{"a", "e", "s", "q", "w"}	
-		};
-		
-		String[][] grid3 = {
-			{"a", "e", "s", "q", "w"},
-			{"a", "e", "s", "q", "w"},
-			{"a", "e", "s", "q", "w"},
-			{"a", "e", "s", "q", "w"},
-			{"a", "e", "s", "q", "w"}	
-		};
-
-		grids.put("1", grid1);
-		grids.put("2", grid2);
-		grids.put("3", grid3);
-		
-
-		System.out.println(createUrl(1, 2, "A2"));
-		
-
 		Tomcat tomcat = new Tomcat();
 		tomcat.setPort(8080);
-//	    tomcat.setPort(Integer.parseInt(port));
 	
 
 	    Context ctx = tomcat.addContext("/", new File(".").getAbsolutePath());
 	
 	    Tomcat.addServlet(ctx, "words", new Words() );
-		    
+		ctx.addServletMapping("/words", "words");
+		Tomcat.addServlet(ctx, "hello1", new Chars() );
+		ctx.addServletMapping("/contest=1&game=1&pos=A5", "hello1");
+		
 
-	    ctx.addServletMapping("/words", "words");
 	    tomcat.start();
 	    tomcat.getServer().await();
+	    
+//	    tomcat.destroy();
+	}
+		
+	public static void buildServletMapping(Context ctx, Tomcat tomcat, HashMap<String, String[][]> grids) {
+		// first, there are 3 games to add 
+		// second, there are 25 positions to add into the url
+		String[] positionInOrder = {
+				"A1", "B1", "C1", "D1", "E1",
+				"A2", "B2", "C2", "D2", "E2",
+				"A3", "B3", "C3", "D3", "E3",
+				"A4", "B4", "C4", "D4", "E4",
+				"A5", "B5", "C5", "D5", "E5",
+		};
+		int counter = 0;
+		
+		// game number is from 1 -> 3
+		for (int i = 1; i < 4; i ++) {
+			for (int j = 0; j < positionInOrder.length; j ++) {
+				Tomcat.addServlet(ctx, "words" + Integer.toString(counter), new Words() );
+				String servletPath = createUrl(1, i, positionInOrder[j]);
+				ctx.addServletMapping(servletPath, "words" + Integer.toString(counter));
+				counter += 1;
+			}
+		}
 	}
 	
 	public static boolean isValidRequest(int game, String column, int row) {
@@ -107,22 +100,14 @@ public class project2 {
 			String pos) {
 		String servletPath = new String();
 		
-		String scheme = "http";
-		String netloc = "localhost";
-		String path = "/wordfinder";
+
+		String path = "/wordfinder?";
 		String query = "contest=" + Integer.toString(contestNumber) + "&game=" + 
 						Integer.toString(gameNumber) + "&pos=" + pos;
-		String auth = null;
-		String fragment = null;
+
 		
-		try {
-			URI uri = new URI(scheme, auth, netloc, port, path, query, fragment);
-			
-			URL url = uri.toURL();
-			return url.toString();
-		} catch (Exception e) {
-			return "";
-		}
+		servletPath += path + query;
+		return servletPath;
 		
 	}
 }
