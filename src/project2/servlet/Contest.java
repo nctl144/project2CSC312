@@ -36,7 +36,7 @@ public class Contest extends HttpServlet {
         
         ServletOutputStream out = resp.getOutputStream();
 
-        out.write(Integer.toString(randomID).getBytes());
+        out.write(("Your contest id is" + Integer.toString(randomID)).getBytes());
  
 //        try {
 //        	Thread.sleep(120 * 1000);

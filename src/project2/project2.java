@@ -26,7 +26,7 @@ public class project2 {
     		  throws LifecycleException, InterruptedException, ServletException {
 
 		Tomcat tomcat = new Tomcat();
-		tomcat.setPort(8080);
+		tomcat.setPort(port);
 
 
 	    Context ctx = tomcat.addContext("/", new File(".").getAbsolutePath());
