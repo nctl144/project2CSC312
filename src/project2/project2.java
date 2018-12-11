@@ -1,6 +1,5 @@
+// Chau Tung Lam Nguyen and Sam Coveney
 package project2;
-
-import java.io.File;
 
 import java.util.HashMap;
 import java.util.ArrayList;
@@ -41,34 +40,15 @@ public class project2 {
 		
 		// add the return-the-char servlet
 		Tomcat.addServlet(ctx, "charreq", new Chars());
-		buildServletMapping(ctx, tomcat);
+		ctx.addServletMapping("/wordfinder", "charreq");
 		
-//		Tomcat.addServlet(ctx, "solution", new Solution());
-//		ctx.addServletMapping("/contest=1&game=1&solution", "solution");
+		// add the solution servlet
+		Tomcat.addServlet(ctx, "solution", new Solution());
+		ctx.addServletMapping("/solution", "solution");
 
 	    tomcat.start();
 	    tomcat.getServer().await();
 
-	}
-
-	public static void buildServletMapping(Context ctx, Tomcat tomcat) {
-		// first, there are 3 games to add
-		// second, there are 25 positions to add into the url
-		String[] positionInOrder = {
-				"A1", "B1", "C1", "D1", "E1",
-				"A2", "B2", "C2", "D2", "E2",
-				"A3", "B3", "C3", "D3", "E3",
-				"A4", "B4", "C4", "D4", "E4",
-				"A5", "B5", "C5", "D5", "E5",
-		};
-
-		// game number is from 1 -> 3
-		for (int i = 1; i < 4; i ++) {
-			for (int j = 0; j < positionInOrder.length; j ++) {
-				String servletPath = createUrl(1, i, positionInOrder[j]);
-				ctx.addServletMapping(servletPath, "charreq");
-			}
-		}
 	}
 
 	public static boolean isValidRequest(int game, String column, int row) {
@@ -117,5 +97,45 @@ public class project2 {
 		servletPath += path + query;
 		return servletPath;
 
+	}
+	
+	public static ArrayList<String> getChar(String url) {
+		ArrayList<String> result = new ArrayList<String>();
+		
+		try {
+			
+			URL current_url = new URL(url);
+			HttpURLConnection connected = (HttpURLConnection) current_url.openConnection(); 
+			int response = connected.getResponseCode(); 
+			InputStream s = connected.getInputStream(); 
+			int i;
+			char c;
+			
+			String word = new String();
+			
+			while((i = s.read()) != -1 && response == 200) {
+			    // converts integer to character
+			    c = (char)i;
+			    if (c == '\n') {
+			    	result.add(word);
+			    	word = "";
+			    } else if (Character.isAlphabetic(c)) {
+			    	word += Character.toString(c);
+			    }
+			}
+			
+			// add the last word
+			if (!word.isEmpty()) {
+				result.add(word);
+			}
+			
+		} catch (IOException e) {
+			ArrayList<String> error = new ArrayList<String>();
+			error.add("The code returned error");
+			return error;
+		}
+		
+		// return empty ArrayList if we are unsuccessful 
+		return result; 
 	}
 }

@@ -31,10 +31,8 @@ public class Solution extends HttpServlet {
         solutions.put("3", "zip");
         
         // http://localhost:8080//solution?contest=&game=<1 to 3>&solution=
-        String path = req.getRequestURI().toString();
-        HashMap<String, String> pathInfo = getReqInfo(path.toString());
-        String gameNum = pathInfo.get("game");
-		String solutionSubmitted = pathInfo.get("solution");
+        String gameNum = req.getParameter("game");
+		String solutionSubmitted = req.getParameter("solution");
 		String solution = solutions.get(gameNum);
 		
 		if (solutionSubmitted.equals(solution)) {
@@ -46,20 +44,5 @@ public class Solution extends HttpServlet {
         out.flush();
         out.close();
         
-    }
-	
-	public HashMap<String, String> getReqInfo(String path) {
-    	HashMap<String, String> result = new HashMap<String, String>();
-    	String pathRaw = path.substring(1);
-    	String[] pathRawComponent = pathRaw.split("&");
-    	
-    	for (int i = 0; i < pathRawComponent.length; i ++) {
-    		String currComp = pathRawComponent[i];
-    		String gameInfoExtractedValue = currComp.split("=")[1];
-    		String gameInfoExtractedKey = currComp.split("=")[0];
-    		result.put(gameInfoExtractedKey, gameInfoExtractedValue);
-    	}
-    	
-    	return result;
     }
 }

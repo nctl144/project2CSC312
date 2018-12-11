@@ -45,19 +45,17 @@ public class Chars extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {
+    	resp.setStatus( HttpServletResponse.SC_OK);
+    	
     	ServletOutputStream output = resp.getOutputStream();
     	HashMap<String, String[][]> grids = new HashMap<String, String[][]>();
 		
 		grids.put("1", grid1);
 		grids.put("2", grid2);
 		grids.put("3", grid3);
-		
-		String path = req.getRequestURI().toString();
 
-		HashMap<String, String> pathInfo = getReqInfo(path.toString());
-		
-		String gameNum = pathInfo.get("game");
-		String position = pathInfo.get("pos");
+		String gameNum = req.getParameter("game");
+		String position = req.getParameter("pos");
 		
 		boolean isValidRequest = isBadRequest(gameNum, position);
 		if (!isValidRequest) {
@@ -66,30 +64,12 @@ public class Chars extends HttpServlet {
 	        output.close();
 		}
 		
-		
-		// check if the request is valid
-		
 		String charRequested = getCharFromGrid(position, grids.get(gameNum));
 		output.write(charRequested.getBytes());
 
         output.flush();
         output.close();
         
-    }
-    
-    public HashMap<String, String> getReqInfo(String path) {
-    	HashMap<String, String> result = new HashMap<String, String>();
-    	String pathRaw = path.substring(1);
-    	String[] pathRawComponent = pathRaw.split("&");
-    	
-    	for (int i = 0; i < pathRawComponent.length; i ++) {
-    		String currComp = pathRawComponent[i];
-    		String gameInfoExtractedValue = currComp.split("=")[1];
-    		String gameInfoExtractedKey = currComp.split("=")[0];
-    		result.put(gameInfoExtractedKey, gameInfoExtractedValue);
-    	}
-    	
-    	return result;
     }
     
     public String getCharFromGrid(String pos, String[][] grids) {

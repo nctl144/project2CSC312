@@ -45,7 +45,7 @@ public class Contest extends HttpServlet {
 //        };
 //        
 //        resp.setStatus(HttpServletResponse.SC_GONE);
-
+        resp.setStatus(HttpServletResponse.SC_GONE);
         out.flush();
         out.close(); 
         
