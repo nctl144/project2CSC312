@@ -4,7 +4,12 @@ import static org.junit.Assert.assertArrayEquals;
 import static org.junit.Assert.assertEquals;
 
 import java.io.IOException;
+import java.io.InputStream;
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Arrays;
 
 import org.junit.Test;
 
@@ -14,32 +19,68 @@ import project2.project2;
 public class testproject2 {
 	
 	@Test
-	public void testReverseString() {
+	public void testGetWordList() {
 		
 		project2 project1Instance = new project2();
 
-//		String[][] grid = {
-//				{"A", "B", "j", "a", "r"},
-//				{"A", "z", "D", "e", "F"},
-//				{"z", "f", "D", "q", "W"},
-//				{"P", "T", "w", "V", "Q"},
-//				{"Z", "O", "q", "H", "I"}
-//			};
+		ArrayList<String> words = getChar("http://localhost:8080/words");
+		String[] actualWords = {"zap", "zep", "zip", "zag", "zig"};
+		
+		for (int i = 0; i < words.size(); i++) {
+			assertEquals(actualWords[i], words.get(i));
+		}
+	}
+	
+//	@Test
+//	public void testGetWordList() {
 //		
-//		String[] words = {"AAz", "asd", "asw"};
-//		HashMap<String, Integer> hmap = new HashMap<String, Integer>();
-//		for (String word: words) {
-//			hmap.put(word, 1);
+//		project2 project1Instance = new project2();
+//
+//		ArrayList<String> words = getChar("http://localhost:8080/words");
+//		String[] actualWords = {"zap", "zep", "zip", "zag", "zig"};
+//		
+//		for (int i = 0; i < words.size(); i++) {
+//			assertEquals(actualWords[i], words.get(i));
 //		}
-//		
-//		assertEquals( "game 1 word AAz location A1:A3", project1Instance.isWordInGrid(grid, hmap, 1) );
-//		
-//		String[] words2 = {"awe", "fTO", "asw"};
-//		HashMap<String, Integer> hmap2 = new HashMap<String, Integer>();
-//		for (String word: words2) {
-//			hmap2.put(word, 1);
-//		}
-//		
-//		assertEquals( "game 1 word fTO location B3:B5", project1Instance.isWordInGrid(grid, hmap2, 1) );
+//	}
+	
+	public ArrayList<String> getChar(String url) {
+		ArrayList<String> result = new ArrayList<String>();
+		
+		try {
+			
+			URL current_url = new URL(url);
+			HttpURLConnection connected = (HttpURLConnection) current_url.openConnection(); 
+			int response = connected.getResponseCode(); 
+			InputStream s = connected.getInputStream(); 
+			int i;
+			char c;
+			
+			String word = new String();
+			
+			while((i = s.read()) != -1 && response == 200) {
+			    // converts integer to character
+			    c = (char)i;
+			    if (c == '\n') {
+			    	result.add(word);
+			    	word = "";
+			    } else if (Character.isAlphabetic(c)) {
+			    	word += Character.toString(c);
+			    }
+			}
+			
+			// add the last word
+			if (!word.isEmpty()) {
+				result.add(word);
+			}
+			
+		} catch (IOException e) {
+			ArrayList<String> error = new ArrayList<String>();
+			error.add("The code returned error");
+			return error;
+		}
+		
+		// return empty ArrayList if we are unsuccessful 
+		return result; 
 	}
 }
