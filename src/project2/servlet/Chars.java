@@ -59,7 +59,7 @@ public class Chars extends HttpServlet {
 		
 		boolean isValidRequest = isBadRequest(gameNum, position);
 		if (!isValidRequest) {
-			output.write(HttpServletResponse.SC_GONE);
+			resp.setStatus(HttpServletResponse.SC_GONE);
 			output.flush();
 	        output.close();
 		}
