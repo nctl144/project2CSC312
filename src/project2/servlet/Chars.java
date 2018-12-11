@@ -19,17 +19,17 @@ import javax.servlet.http.HttpServletResponse;
 public class Chars extends HttpServlet {
 	
 	String[][] grid1 = {
-			{"a", "e", "s", "q", "w"},
-			{"a", "e", "s", "q", "w"},
-			{"a", "e", "s", "q", "w"},
-			{"a", "e", "s", "q", "w"},
-			{"a", "e", "s", "q", "w"}
-		};
+		{"z", "e", "s", "q", "w"},
+		{"a", "e", "s", "q", "w"},
+		{"p", "e", "s", "q", "w"},
+		{"a", "e", "s", "q", "w"},
+		{"a", "e", "s", "q", "w"}
+	};
 		
 	String[][] grid2 = {
 		{"a", "e", "s", "q", "w"},
 		{"a", "e", "s", "q", "w"},
-		{"a", "e", "s", "q", "w"},
+		{"z", "e", "p", "q", "w"},
 		{"a", "e", "s", "q", "w"},
 		{"a", "e", "s", "q", "w"}	
 	};
@@ -38,7 +38,7 @@ public class Chars extends HttpServlet {
 		{"a", "e", "s", "q", "w"},
 		{"a", "e", "s", "q", "w"},
 		{"a", "e", "s", "q", "w"},
-		{"a", "e", "s", "q", "w"},
+		{"a", "e", "z", "i", "p"},
 		{"a", "e", "s", "q", "w"}	
 	};
 		

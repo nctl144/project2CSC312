@@ -16,6 +16,8 @@ import org.apache.catalina.startup.Tomcat;
 import project2.servlet.Words;
 import project2.servlet.Chars;
 import project2.servlet.Contest;
+import project2.servlet.Solution;
+
 
 public class project2 {
 	public static int port = 8080;
@@ -29,18 +31,24 @@ public class project2 {
 
 	    Context ctx = tomcat.addContext("/", new File(".").getAbsolutePath());
 	    
-	    Tomcat.addServlet(ctx, "contest", new Contest() );    
+	    // add the contest servlet
+	    Tomcat.addServlet(ctx, "contest", new Contest());    
 		ctx.addServletMapping("/newcontest", "contest");
 		
-	    Tomcat.addServlet(ctx, "words", new Words() );
+		// add the list-of-words servlet
+	    Tomcat.addServlet(ctx, "words", new Words());
 		ctx.addServletMapping("/words", "words");
-		Tomcat.addServlet(ctx, "charreq", new Chars() );
+		
+		// add the return-the-char servlet
+		Tomcat.addServlet(ctx, "charreq", new Chars());
 		buildServletMapping(ctx, tomcat);
+		
+//		Tomcat.addServlet(ctx, "solution", new Solution());
+//		ctx.addServletMapping("/contest=1&game=1&solution", "solution");
 
 	    tomcat.start();
 	    tomcat.getServer().await();
 
-//	    tomcat.destroy();
 	}
 
 	public static void buildServletMapping(Context ctx, Tomcat tomcat) {

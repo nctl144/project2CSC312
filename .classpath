@@ -46,5 +46,6 @@
 	<classpathentry kind="lib" path="lib/tomcat-util.jar"/>
 	<classpathentry kind="lib" path="lib/tomcat7-websocket.jar"/>
 	<classpathentry kind="lib" path="lib/websocket-api.jar"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/5"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
