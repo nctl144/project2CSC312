@@ -23,26 +23,29 @@ public class Contest extends HttpServlet {
        
         //ArrayList<Integer> usedIDs = new ArrayList<Integer>();
         HashMap<Integer, Integer> usedIDs = new HashMap<>();
-       
-        int index = 0;
-        int currentID;
-        while (true) {
-            int contestID = generateID();
-            if (!usedIDs.containsValue(contestID)) {
-                usedIDs.put(index++, contestID);
-                currentID = contestID;
-                break;
-            }
+
+        int randomID = generateID();
+        
+        // if random id is in the hashmap -> create a new one
+        while (usedIDs.containsValue(randomID)) {
+            randomID = generateID();
         }
         
+        // when it reaches here -> the id is unique
+        usedIDs.put(randomID, 1);
         
         ServletOutputStream out = resp.getOutputStream();
-        out.write(currentID);
-        try {
-        Thread.sleep(120 * 1000);
-        } throws InterruptException(e);
-        
-        resp.setStatus(HttpServletResponse.SC_GONE);
+
+        out.write(Integer.toString(randomID).getBytes());
+ 
+//        try {
+//        	Thread.sleep(120 * 1000);
+//        } catch (Exception e) {
+//        	System.out.print("there is error when trying to sleep");
+//        };
+//        
+//        resp.setStatus(HttpServletResponse.SC_GONE);
+
         out.flush();
         out.close(); 
         
@@ -50,7 +53,7 @@ public class Contest extends HttpServlet {
    
     public int generateID() {
         Random r = new Random();
-        return r.nextInt(1000-1) + 1;
+        return r.nextInt(1000 - 1) + 1;
     }
 
 }
