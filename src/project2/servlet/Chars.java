@@ -127,7 +127,6 @@ public class Chars extends HttpServlet {
     	}
     	
     	if (Integer.parseInt(gameNumber) <= 3 && Integer.parseInt(gameNumber) >= 1) {
-    		out.print("this is here 2");
     		validGameNum = true;
     	}
   
