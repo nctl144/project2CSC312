@@ -30,7 +30,7 @@ public class project2 {
 	    Context ctx = tomcat.addContext("/", new File(".").getAbsolutePath());
 	    
 	    Tomcat.addServlet(ctx, "contest", new Contest() );    
-		ctx.addServletMapping("/contests", "contest");
+		ctx.addServletMapping("/newcontest", "contest");
 		
 	    Tomcat.addServlet(ctx, "words", new Words() );
 		ctx.addServletMapping("/words", "words");
