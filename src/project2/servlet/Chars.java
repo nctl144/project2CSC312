@@ -60,18 +60,30 @@ public class Chars extends HttpServlet {
 		String position = req.getParameter("pos");
 		String contest = req.getParameter("contest");
 		
-		if (!game.ifInGame(Integer.parseInt(contest))) {
-			out.write("Your contest is expired, please create a new one".getBytes());
+		if (contest != "1001") {
+			String charRequested = getCharFromGrid(position, grids.get(gameNum));
+			output.write(charRequested.getBytes());
+			output.flush();
+	        output.close();
 		}
 		
-		boolean isValidRequest = isBadRequest(gameNum, position);
-		if (!isValidRequest) {
+		if (!game.ifInGame(Integer.parseInt(contest))) {
+			out.write("Your contest is expired, please create a new one".getBytes());
 			resp.setStatus(HttpServletResponse.SC_GONE);
 			output.flush();
 	        output.close();
 		}
 		
+		boolean isValidRequest = isBadRequest(gameNum, position);
+		if (!isValidRequest) {
+			resp.setStatus(HttpServletResponse.SC_BAD_REQUEST);
+			output.flush();
+	        output.close();
+		}
+		
 		String charRequested = getCharFromGrid(position, grids.get(gameNum));
+		// incrememnt request count
+		game.incrementRequestCount();
 		output.write(charRequested.getBytes());
 
         output.flush();

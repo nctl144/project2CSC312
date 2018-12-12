@@ -16,6 +16,7 @@ public class game {
 	
 	private static long start;
 	private Integer id;
+	private static Integer requestCount = 0;
 	
 	//to prevent anyone from creating it directly
 	private game(int id) {
@@ -27,7 +28,7 @@ public class game {
 		return id;
 	}
 	
-	public boolean isExpired() {
+	public static boolean isExpired() {
 		return (System.currentTimeMillis() - start ) > DELAY;
 	}
 	
@@ -115,5 +116,13 @@ public class game {
 	
 	public static Map<Integer, Long> getHighScore() {
 		return highScore;
+	}
+	
+	public static void incrementRequestCount() {
+		requestCount++;
+	}
+	
+	public static int getRequestCount() {
+		return requestCount;
 	}
 }

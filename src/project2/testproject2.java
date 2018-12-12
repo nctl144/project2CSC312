@@ -1,7 +1,10 @@
 package project2;
 
 import static org.junit.Assert.assertArrayEquals;
+
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
 import java.io.File;
 import java.io.IOException;
@@ -10,6 +13,7 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Map;
 
 import javax.servlet.ServletException;
 
@@ -24,6 +28,7 @@ import project2.project2;
 import project2.servlet.Chars;
 import project2.servlet.Contest;
 import project2.servlet.Words;
+import project2.game;
 
 
 public class testproject2 {
@@ -41,11 +46,10 @@ public class testproject2 {
 	
 	@Test
 	public void testNewContest() {
-		ArrayList<String> contestNum = getChar("http://localhost:8080/newcontest");
-		String listString = String.join("", contestNum);
+		String newContest = getChar("http://localhost:8080/newcontest").get(0);
 		
-		// this means a random contest has been generated
-		assertEquals("Yourcontestidis", listString);
+		// this means the contest has been created successfully
+		assertEquals("Yourcontestidis", newContest);
 	}
 	
 	@Test
@@ -69,11 +73,39 @@ public class testproject2 {
 		
 		for (int i = 0; i < positionInOrder.length; i ++) {
 			String currPos = positionInOrder[i];
-			String url = "http://localhost:8080/contest=1&game=1&pos=" + currPos;
+			String url = "http://localhost:8080/wordfinder?contest=1001&game=1&pos=" + currPos;
 
 			String currChar = getChar(url).get(0);
 			assertEquals(grid1[i], currChar);
 		}
+	}
+	
+	@Test
+	public void testTimeOut() {
+		
+		game.newContest(1);
+		
+		assertFalse( game.isExpired() );
+		
+		try {
+			Thread.currentThread().sleep( 120 * 1000);
+		} catch (Exception exc) {
+			System.out.print("there is something wrong when the thread is trying to sleep");
+		}
+		
+		assertTrue( game.isExpired() );
+		
+	}
+	
+	@Test 
+	public void testSubmission() {
+		game.newContest(1);
+	}
+	
+	@Test
+	public void testTopScore() {
+		Map<Integer, Long> highScore = game.getHighScore();
+		
 	}
 	
 	public ArrayList<String> getChar(String url) {
