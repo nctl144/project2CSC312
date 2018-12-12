@@ -16,6 +16,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import project2.game;
+
 
 public class Solution extends HttpServlet {
 	@Override
@@ -33,16 +35,22 @@ public class Solution extends HttpServlet {
         // http://localhost:8080//solution?contest=&game=<1 to 3>&solution=
         String gameNum = req.getParameter("game");
 		String solutionSubmitted = req.getParameter("solution");
+		String contestNum = req.getParameter("contest");
 		String solution = solutions.get(gameNum);
+		
+		if (!game.ifInGame(Integer.parseInt(contestNum))) {
+			out.write("Your contest is expired, please create a new one".getBytes());
+		}
 		
 		if (solutionSubmitted.equals(solution)) {
 			out.write("The solution is correct!".getBytes());
+			// add this solution to the topscore
+			game.addTopScore(Integer.parseInt(contestNum), game.timeElapsed());
 		} else {
 			out.write("The solution is incorrect!".getBytes());
 		}
 
         out.flush();
         out.close();
-        
     }
 }

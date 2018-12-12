@@ -8,10 +8,13 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
 import java.util.Random;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Timer;
+
+import project2.game;
 
 
 public class Contest extends HttpServlet {
@@ -19,6 +22,7 @@ public class Contest extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {
+    	
         resp.setStatus( HttpServletResponse.SC_OK);
        
         //ArrayList<Integer> usedIDs = new ArrayList<Integer>();
@@ -36,16 +40,12 @@ public class Contest extends HttpServlet {
         
         ServletOutputStream out = resp.getOutputStream();
 
-        out.write(("Your contest id is" + Integer.toString(randomID)).getBytes());
- 
-//        try {
-//        	Thread.sleep(120 * 1000);
-//        } catch (Exception e) {
-//        	System.out.print("there is error when trying to sleep");
-//        };
-//        
-//        resp.setStatus(HttpServletResponse.SC_GONE);
-        resp.setStatus(HttpServletResponse.SC_GONE);
+        out.write(("Your contest id is " + Integer.toString(randomID)).getBytes());
+        
+        // create a new contest in the singleton
+        game.newContest(randomID);
+        
+
         out.flush();
         out.close(); 
         

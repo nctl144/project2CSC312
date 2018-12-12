@@ -16,6 +16,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import project2.game;
+
 public class Chars extends HttpServlet {
 	
 	String[][] grid1 = {
@@ -56,6 +58,11 @@ public class Chars extends HttpServlet {
 
 		String gameNum = req.getParameter("game");
 		String position = req.getParameter("pos");
+		String contest = req.getParameter("contest");
+		
+		if (!game.ifInGame(Integer.parseInt(contest))) {
+			out.write("Your contest is expired, please create a new one".getBytes());
+		}
 		
 		boolean isValidRequest = isBadRequest(gameNum, position);
 		if (!isValidRequest) {

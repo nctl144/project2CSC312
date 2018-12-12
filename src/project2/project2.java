@@ -2,6 +2,7 @@
 package project2;
 
 import java.util.HashMap;
+
 import java.util.ArrayList;
 import java.net.*;
 import java.io.*;
@@ -16,6 +17,7 @@ import project2.servlet.Words;
 import project2.servlet.Chars;
 import project2.servlet.Contest;
 import project2.servlet.Solution;
+import project2.servlet.Topscore;
 
 
 public class project2 {
@@ -45,9 +47,12 @@ public class project2 {
 		// add the solution servlet
 		Tomcat.addServlet(ctx, "solution", new Solution());
 		ctx.addServletMapping("/solution", "solution");
+		
+		// add the top score
+		Tomcat.addServlet(ctx, "topScore", new Topscore());
+		ctx.addServletMapping("/topscore", "topScore");
 
 	    tomcat.start();
 	    tomcat.getServer().await();
-
 	}
 }
