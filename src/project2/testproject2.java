@@ -99,7 +99,10 @@ public class testproject2 {
 	
 	@Test 
 	public void testSubmission() {
-		game.newContest(1);
+		String solution = getChar("http://localhost:8080/solution?contest=1001&game=1&solution=zap").get(0);
+		
+		// this means the contest has been created successfully
+		assertEquals("Thesolutioniscorrect", solution);
 	}
 	
 	@Test

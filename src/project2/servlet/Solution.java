@@ -44,6 +44,23 @@ public class Solution extends HttpServlet {
 		String solution = solutions.get(gameNum);
 		String position = positions.get(gameNum);
 		
+		if (contestNum.equals("1001")) {
+			if (solutionSubmitted.equals(solution)) {
+				resp.setStatus(HttpServletResponse.SC_OK);
+				out.write("The solution is correct!\n".getBytes());
+				out.write(("Game: " + gameNum + ", position: " + position + ", solution: " + solution).getBytes());
+				out.write(("it took you: " + game.timeElapsed() + " milliseconds and " + Integer.toString(game.getRequestCount()) + " request(s) to solve the problem").getBytes());
+
+				// add this solution to the topscore
+				game.addTopScore(Integer.parseInt(contestNum), game.timeElapsed());
+			} else {
+				resp.setStatus(HttpServletResponse.SC_BAD_REQUEST);
+				out.write("The solution is incorrect!".getBytes());
+			}
+			out.flush();
+	        out.close();
+		}
+		
 		if (!game.ifInGame(Integer.parseInt(contestNum))) {
 			out.write("Your contest is expired, please create a new one".getBytes());
 			resp.setStatus(HttpServletResponse.SC_GONE);

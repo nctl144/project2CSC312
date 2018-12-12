@@ -60,7 +60,7 @@ public class Chars extends HttpServlet {
 		String position = req.getParameter("pos");
 		String contest = req.getParameter("contest");
 		
-		if (contest != "1001") {
+		if (contest.equals("1001")) {
 			String charRequested = getCharFromGrid(position, grids.get(gameNum));
 			output.write(charRequested.getBytes());
 			output.flush();
